@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>まちなか長屋 | 空き家を活用した高齢者向け安心シェアハウス</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        sage: {
+                            50: '#f4f7f4',
+                            100: '#e3ebe3',
+                            500: '#52796f',
+                            600: '#354f52',
+                            700: '#2f3e46',
+                        },
+                        warm: {
+                            bg: '#FAF7F2',
+                            card: '#FFFFFF',
+                            text: '#2D2B2A',
+                            subtle: '#6E6B68'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Noto Sans JP"', 'sans-serif'],
+                        maru: ['"Zen Maru Gothic"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAF7F2;
+            color: #2D2B2A;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+        .font-maru {
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+        .wood-pattern {
+            background-color: #faf7f2;
+            background-image: radial-gradient(#d97706 0.75px, transparent 0.75px), radial-gradient(#d97706 0.75px, #faf7f2 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            background-opacity: 0.05;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F0EAE1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #D97706;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md shadow-sm border-b border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 flex items-center justify-center text-white text-2xl font-bold shadow-md group-hover:scale-105 transition-transform">
+                    <i class="fa-solid font-maru">長</i>
+                </div>
+                <div>
+                    <span class="text-2xl font-bold font-maru text-brand-900 tracking-wide block leading-none">まちなか長屋</span>
+                    <span class="text-xs text-brand-700 font-medium tracking-wider">地域とつながる安心シェアハウス</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center space-x-8 text-base font-medium text-gray-700">
+                <a href="#concept" class="hover:text-brand-600 transition-colors">コンセプト</a>
+                <a href="#facilities" class="hover:text-brand-600 transition-colors">住まい・お部屋</a>
+                <a href="#support" class="hover:text-brand-600 transition-colors">安心のサポート</a>
+                <a href="#simulation" class="hover:text-brand-600 transition-colors">ご利用料金</a>
+                <a href="#faq" class="hover:text-brand-600 transition-colors">よくある質問</a>
+            </nav>
+
+            <!-- Call to Action Buttons -->
+            <div class="hidden lg:flex items-center gap-3">
+                <a href="tel:0120-000-000" class="flex items-center gap-2 px-4 py-2 rounded-xl text-brand-800 bg-amber-50 hover:bg-amber-100 font-bold transition">
+                    <i class="fa-solid fa-phone text-brand-600"></i>
+                    <div>
+                        <div class="text-[10px] leading-tight text-gray-500">ご相談無料（平日9:00-18:00）</div>
+                        <div class="text-base font-bold leading-tight">0120-XXX-XXX</div>
+                    </div>
+                </a>
+                <button onclick="openModal()" class="px-5 py-3 rounded-xl bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white font-bold shadow-md hover:shadow-lg transition transform active:scale-95 flex items-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>見学・相談を予約</span>
+                </button>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" class="md:hidden p-2 rounded-lg text-gray-700 hover:bg-amber-50 focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-amber-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#concept" class="block py-2 text-gray-700 font-medium hover:text-brand-600 border-b border-gray-100">コンセプト</a>
+            <a href="#facilities" class="block py-2 text-gray-700 font-medium hover:text-brand-600 border-b border-gray-100">住まい・お部屋</a>
+            <a href="#support" class="block py-2 text-gray-700 font-medium hover:text-brand-600 border-b border-gray-100">安心のサポート</a>
+            <a href="#simulation" class="block py-2 text-gray-700 font-medium hover:text-brand-600 border-b border-gray-100">ご利用料金</a>
+            <a href="#faq" class="block py-2 text-gray-700 font-medium hover:text-brand-600 border-b border-gray-100">よくある質問</a>
+            <div class="pt-2 space-y-2">
+                <a href="tel:0120-000-000" class="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-amber-50 text-brand-800 font-bold">
+                    <i class="fa-solid fa-phone"></i> 0120-XXX-XXX（通話無料）
+                </a>
+                <button onclick="openModal()" class="w-full py-3 rounded-xl bg-brand-600 text-white font-bold shadow-md">
+                    見学・入居相談を予約する
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative overflow-hidden bg-gradient-to-b from-amber-50/80 via-warm-bg to-warm-bg pt-10 pb-16 lg:pt-16 lg:pb-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- Hero Left Column: Texts & CTAs -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-amber-100/80 border border-amber-300 text-brand-900 text-sm md:text-base font-bold shadow-sm">
+                        <span class="bg-brand-600 text-white text-xs px-2 py-0.5 rounded-full">NEW</span>
+                        空き家再生モデルの新しい高齢者向け賃貸
+                    </div>
+                    
+                    <h1 class="text-3xl sm:text-4xl lg:text-5xl font-black font-maru text-brand-900 leading-tight sm:leading-tight lg:leading-tight">
+                        孤立しない、でも干渉されすぎない。<br class="hidden sm:inline">
+                        <span class="text-brand-600 underline decoration-amber-300 underline-offset-8">地域とつながる</span> まちなか長屋
+                    </h1>
+                    
+                    <p class="text-base sm:text-lg text-gray-700 leading-relaxed font-normal max-w-2xl mx-auto lg:mx-0">
+                        「1人の独居は少し不安だけど、高額な施設には入りたくない」<br class="hidden md:inline">
+                        年金の範囲内（月額6.5万円〜）で無理なく暮らせる、ぬくもりのあるバリアフリー共有住まい。地域の温かい眼差しに包まれた、あたらしい実家です。
+                    </p>
+
+                    <!-- Key Benefits Pills -->
+                    <div class="grid grid-cols-3 gap-3 pt-2 max-w-xl mx-auto lg:mx-0 text-center">
+                        <div class="p-3 rounded-2xl bg-white border border-amber-100 shadow-sm">
+                            <i class="fa-solid fa-yen-sign text-2xl text-brand-600 mb-1"></i>
+                            <p class="text-xs text-gray-500">年金内で安心</p>
+                            <p class="text-sm font-bold text-gray-900">月額6.5万円〜</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-white border border-amber-100 shadow-sm">
+                            <i class="fa-solid fa-shield-halved text-2xl text-sage-500 mb-1"></i>
+                            <p class="text-xs text-gray-500">プライバシー重視</p>
+                            <p class="text-sm font-bold text-gray-900">全室鍵付き個室</p>
+                        </div>
+                        <div class="p-3 rounded-2xl bg-white border border-amber-100 shadow-sm">
+                            <i class="fa-solid fa-heart-pulse text-2xl text-rose-500 mb-1"></i>
+                            <p class="text-xs text-gray-500">24時間IoT見守り</p>
+                            <p class="text-sm font-bold text-gray-900">緊急手配・医療提携</p>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                        <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-800 text-white font-bold text-lg shadow-lg hover:shadow-xl transition transform active:scale-98 flex items-center justify-center gap-3">
+                            <i class="fa-solid fa-house-user"></i>
+                            <span>無料で見学・体験相談をする</span>
+                        </button>
+                        <a href="#simulation" class="w-full sm:w-auto px-6 py-4 rounded-2xl bg-white hover:bg-amber-50 text-brand-800 font-bold border-2 border-brand-200 text-center transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-calculator"></i>
+                            <span>毎月の費用を計算する</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Right Column: Feature Visual Cards -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <!-- Main Image Card -->
+                        <div class="rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative z-10 bg-white">
+                            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="明るいコモンリビング" class="w-full h-80 sm:h-96 object-cover">
+                            <div class="p-5 bg-white">
+                                <div class="flex items-center justify-between">
+                                    <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full">コモンリビング</span>
+                                    <span class="text-xs text-gray-500"><i class="fa-solid fa-users text-amber-500 mr-1"></i>夕食はみんなで囲む</span>
+                                </div>
+                                <h3 class="font-bold font-maru text-gray-900 text-lg mt-2">温もりのある木造戸建てをリノベーション</h3>
+                                <p class="text-xs text-gray-600 mt-1">掘りごたつや日当たりの良い庭・縁側。昔ながらの落ち着く生活空間。</p>
+                            </div>
+                        </div>
+
+                        <!-- Sub Floating Card 1 -->
+                        <div class="absolute -bottom-6 -left-6 z-20 bg-white p-4 rounded-2xl shadow-xl border border-amber-100 hidden sm:flex items-center gap-3 max-w-xs animate-bounce-slow">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-xl shrink-0">
+                                <i class="fa-solid fa-utensils"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs font-bold text-gray-800">子ども食堂・地域カフェ併設</p>
+                                <p class="text-[11px] text-gray-500">地域の人々が集うにぎやかな交流スペース</p>
+                            </div>
+                        </div>
+
+                        <!-- Background Decorative Elements -->
+                        <div class="absolute -top-10 -right-10 w-40 h-40 bg-brand-200 rounded-full blur-2xl opacity-60"></div>
+                        <div class="absolute -bottom-10 -left-10 w-40 h-40 bg-emerald-200 rounded-full blur-2xl opacity-60"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 3 Issues Solved Section -->
+    <section class="py-16 bg-white border-y border-amber-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">3 ISSUES SOLVED</span>
+                <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold font-maru text-gray-900 mt-2">
+                    「まちなか長屋」が解決する、現代の3つの社会的課題
+                </h2>
+                <p class="text-gray-600 text-base mt-3">
+                    サ高住や有料老人ホームのような高額な負担なしで、誰もが安心して地域で自分らしく暮らせる社会へ。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Issue 1 -->
+                <div class="bg-warm-bg rounded-2xl p-6 border border-amber-100 relative group hover:shadow-lg transition">
+                    <div class="w-14 h-14 rounded-2xl bg-amber-500 text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-md">
+                        <i class="fa-solid fa-house-crack"></i>
+                    </div>
+                    <div class="text-xs font-bold text-brand-600 mb-1">課題 01</div>
+                    <h3 class="text-xl font-bold text-gray-900 font-maru mb-2">増え続ける空き家問題</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        地域に眠る質の高い木造一戸建て（5LDK〜7LDK）を活用。新築建設コストを抑えることで、圧倒的な低価格を実現しています。
+                    </p>
+                </div>
+
+                <!-- Issue 2 -->
+                <div class="bg-warm-bg rounded-2xl p-6 border border-amber-100 relative group hover:shadow-lg transition">
+                    <div class="w-14 h-14 rounded-2xl bg-rose-500 text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-md">
+                        <i class="fa-solid fa-heart-crack"></i>
+                    </div>
+                    <div class="text-xs font-bold text-rose-600 mb-1">課題 02</div>
+                    <h3 class="text-xl font-bold text-gray-900 font-maru mb-2">単身高齢者の孤立・不安</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        「1人での寂しさ」や「急病時の心配」を解消。鍵付き個室でプライバシーを保ちつつ、ゆるやかな会話と共食で温かく見守ります。
+                    </p>
+                </div>
+
+                <!-- Issue 3 -->
+                <div class="bg-warm-bg rounded-2xl p-6 border border-amber-100 relative group hover:shadow-lg transition">
+                    <div class="w-14 h-14 rounded-2xl bg-sage-500 text-white flex items-center justify-center text-2xl font-bold mb-4 shadow-md">
+                        <i class="fa-solid fa-ban"></i>
+                    </div>
+                    <div class="text-xs font-bold text-sage-600 mb-1">課題 03</div>
+                    <h3 class="text-xl font-bold text-gray-900 font-maru mb-2">民間賃貸の入居拒否問題</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        高齢という理由で賃貸が借りにくい現状を打破。見守りセンサーと身元保証サポート、孤独死保険完備で安心して入居可能です。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept" class="py-16 md:py-24 wood-pattern relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white/90 backdrop-blur rounded-3xl p-8 sm:p-12 border border-amber-200 shadow-xl">
+                <div class="grid lg:grid-cols-12 gap-10 items-center">
+                    
+                    <div class="lg:col-span-6 space-y-6">
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full">私たちのコンセプト</span>
+                        <h2 class="text-3xl sm:text-4xl font-bold font-maru text-brand-900 leading-tight">
+                            孤立しない、でも干渉されすぎない。<br>
+                            「我が家」の心地よさをもう一度。
+                        </h2>
+                        <p class="text-gray-700 leading-relaxed text-base">
+                            「施設に入るほど介護が必要なわけではないけれど、独り暮らしは心細い。」<br>
+                            まちなか長屋は、そんな方のための共生型グループリビングです。
+                        </p>
+                        <p class="text-gray-700 leading-relaxed text-base">
+                            昔の昭和の長屋のように、近所のお裾分けや挨拶が行き交う穏やかな時間。自分の時間をしっかり守りながら、夕食時には「今日もお疲れ様」と声を掛け合える関係性を育みます。
+                        </p>
+
+                        <!-- Target Audience List -->
+                        <div class="bg-amber-50/80 p-5 rounded-2xl border border-amber-200">
+                            <h4 class="font-bold text-brand-900 text-sm mb-3 flex items-center gap-2">
+                                <i class="fa-solid fa-user-check text-brand-600"></i> このような方におすすめです
+                            </h4>
+                            <ul class="space-y-2 text-sm text-gray-700">
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-brand-600 mt-1"></i>
+                                    <span>自立〜要支援・軽度要介護（日常生活が概ねご自身で可能な方）</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-brand-600 mt-1"></i>
+                                    <span>高額な有料老人ホームやサ高住への入居が資金的に難しい方</span>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <i class="fa-solid fa-check text-brand-600 mt-1"></i>
+                                    <span>一人暮らしで食事や体調管理、防犯・防災に不安を感じている方</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-6">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-4">
+                                <div class="rounded-2xl overflow-hidden shadow-md">
+                                    <img src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?auto=format&fit=crop&w=600&q=80" alt="談笑するシニア" class="w-full h-48 object-cover">
+                                </div>
+                                <div class="bg-sage-50 p-4 rounded-2xl border border-sage-100 text-center">
+                                    <div class="text-2xl font-bold text-sage-600 font-maru">夕食共食</div>
+                                    <div class="text-xs text-gray-600 mt-1">日替わりのお弁当や訪問調理員の手配で楽しく食事</div>
+                                </div>
+                            </div>
+                            <div class="space-y-4 pt-6">
+                                <div class="bg-amber-50 p-4 rounded-2xl border border-amber-100 text-center">
+                                    <div class="text-2xl font-bold text-brand-700 font-maru">家守（ヤモリ）</div>
+                                    <div class="text-xs text-gray-600 mt-1">近所の元気に活躍するスタッフが優しくサポート</div>
+                                </div>
+                                <div class="rounded-2xl overflow-hidden shadow-md">
+                                    <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?auto=format&fit=crop&w=600&q=80" alt="地域の縁側交流" class="w-full h-48 object-cover">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities & Interactive Floor Map Section -->
+    <section id="facilities" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">FACILITIES & ROOMS</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-maru text-gray-900 mt-2">
+                    空間デザイン・安心の設備
+                </h2>
+                <p class="text-gray-600 text-base mt-3">
+                    延床面積120〜200㎡のゆったりとした木造一戸建て。プライバシーを守る個室と、広々としたバリアフリー共有スペース。
+                </p>
+            </div>
+
+            <!-- Interactive Tab System -->
+            <div class="bg-warm-bg rounded-3xl border border-amber-200 p-6 md:p-8 shadow-md">
+                
+                <!-- Tab Buttons -->
+                <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
+                    <button onclick="switchTab('private')" id="tab-btn-private" class="facility-tab-btn active px-5 py-3 rounded-2xl font-bold text-sm md:text-base transition-all flex items-center gap-2 bg-brand-600 text-white shadow-md">
+                        <i class="fa-solid fa-bed"></i> 専有部（鍵付き個室）
+                    </button>
+                    <button onclick="switchTab('living')" id="tab-btn-living" class="facility-tab-btn px-5 py-3 rounded-2xl font-bold text-sm md:text-base transition-all flex items-center gap-2 bg-white text-gray-700 hover:bg-amber-100">
+                        <i class="fa-solid fa-couch"></i> 共有リビング
+                    </button>
+                    <button onclick="switchTab('sanitary')" id="tab-btn-sanitary" class="facility-tab-btn px-5 py-3 rounded-2xl font-bold text-sm md:text-base transition-all flex items-center gap-2 bg-white text-gray-700 hover:bg-amber-100">
+                        <i class="fa-solid fa-bath"></i> バリアフリー水回り
+                    </button>
+                    <button onclick="switchTab('community')" id="tab-btn-community" class="facility-tab-btn px-5 py-3 rounded-2xl font-bold text-sm md:text-base transition-all flex items-center gap-2 bg-white text-gray-700 hover:bg-amber-100">
+                        <i class="fa-solid fa-tree"></i> 縁側・地域交流スペース
+                    </button>
+                </div>
+
+                <!-- Tab Content 1: Private Room -->
+                <div id="tab-content-private" class="facility-content grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&w=800&q=80" alt="明るい和モダン個室" class="w-full h-80 object-cover">
+                    </div>
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full">お一人様用・全室鍵付き</span>
+                        <h3 class="text-2xl font-bold font-maru text-gray-900">プライバシーをしっかり護る「専用個室」</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            6畳〜8畳の明るいお部屋。お気に入りの家具をお持ち込みいただけます。鍵付きドアで個人の時間を安心してお過ごしいただけます。
+                        </p>
+                        <div class="space-y-2 pt-2">
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-wifi text-brand-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">全室エアコン・Wi-Fi・照明完備</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-tower-cell text-rose-500 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">緊急呼出ボタン＆開閉検知IoTセンサー</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-key text-amber-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">安心の施錠可能プライベートドア</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content 2: Living -->
+                <div id="tab-content-living" class="facility-content hidden grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="広々コモンリビング" class="w-full h-80 object-cover">
+                    </div>
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full">団らんの場所</span>
+                        <h3 class="text-2xl font-bold font-maru text-gray-900">自然と会話が生まれる「コモンリビング」</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            建物の中心に位置する広々としたリビング・ダイニング。みんなで食事を楽しめる大型テーブルや、足を伸ばせる畳・掘りごたつコーナーを配置。
+                        </p>
+                        <div class="space-y-2 pt-2">
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-tv text-brand-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">大型TV・新聞コーナー完備</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-mug-hot text-amber-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">自由にお茶を楽しめるキッチン</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content 3: Sanitary -->
+                <div id="tab-content-sanitary" class="facility-content hidden grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=800&q=80" alt="バリアフリー浴室・水回り" class="w-full h-80 object-cover">
+                    </div>
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full">バリアフリー設計</span>
+                        <h3 class="text-2xl font-bold font-maru text-gray-900">安全に配慮された「水回り設備」</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            段差をなくしたスロープや手すり設置。車椅子でも利用しやすい多機能トイレを2箇所以上備え、またぎやすい浅型浴室を採用しています。
+                        </p>
+                        <div class="space-y-2 pt-2">
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-wheelchair text-brand-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">車椅子対応トイレ 2箇所以上設置</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-shower text-amber-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">またぎやすい浅型風呂＆滑り止め床</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tab Content 4: Community -->
+                <div id="tab-content-community" class="facility-content hidden grid lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 rounded-2xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1516156008625-3a9d6067fab5?auto=format&fit=crop&w=800&q=80" alt="縁側・庭と子ども食堂スペース" class="w-full h-80 object-cover">
+                    </div>
+                    <div class="lg:col-span-5 space-y-4">
+                        <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full">地域交流</span>
+                        <h3 class="text-2xl font-bold font-maru text-gray-900">街にひらかれた「縁側＆地域カフェ」</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            庭に面した日当たりの良い縁側。玄関横の1室を「地域カフェ・子ども食堂」として開放し、近所の子どもたちや地域のシニアと自然な触れ合いが生まれます。
+                        </p>
+                        <div class="space-y-2 pt-2">
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-child-reaching text-brand-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">子ども食堂・地域カフェ（定期開催）</span>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-white rounded-xl border border-amber-100">
+                                <i class="fa-solid fa-sun text-amber-600 text-lg"></i>
+                                <span class="text-sm font-bold text-gray-800">日当たりの良いお庭で花壇づくりや日向ぼっこ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Support System Section -->
+    <section id="support" class="py-16 md:py-24 bg-amber-50/60 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">SECURITY & CARE</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-maru text-brand-900 mt-2">
+                    見守り・医療と地域介護の安心連携
+                </h2>
+                <p class="text-gray-600 text-base mt-3">
+                    過剰な干渉を行わず、テクノロジーと人の目で見守る仕組みを整備。介護度が上がっても長く住み続けられる環境を提案します。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Support Card 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100 text-brand-700 flex items-center justify-center text-2xl font-bold mb-4">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">IoTセンサー見守り</h3>
+                    <p class="text-gray-600 text-xs leading-relaxed">
+                        トイレやドアの開閉・人感センサーにより、生活反応をさり気なく確認。カメラを使わずプライバシーを守りつつ異変を察知します。
+                    </p>
+                </div>
+
+                <!-- Support Card 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center text-2xl font-bold mb-4">
+                        <i class="fa-solid fa-user-nurse"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">地域医療・介護連携</h3>
+                    <p class="text-gray-600 text-xs leading-relaxed">
+                        地域の訪問看護・定期巡回介護事業所や、かかりつけ医としっかり提携。医療・介護が必要になっても外部サービスで手厚く対応。
+                    </p>
+                </div>
+
+                <!-- Support Card 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-2xl font-bold mb-4">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">ハウスキーパー（家守）</h3>
+                    <p class="text-gray-600 text-xs leading-relaxed">
+                        近所の元気なシニアや主婦スタッフが「家守（やもり）」として日中訪問。共用部の清掃や、話し相手、日々の見守りを担当します。
+                    </p>
+                </div>
+
+                <!-- Support Card 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm hover:shadow-md transition">
+                    <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-700 flex items-center justify-center text-2xl font-bold mb-4">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">身元保証・保険対応</h3>
+                    <p class="text-gray-600 text-xs leading-relaxed">
+                        孤独死保険や緊急駆けつけサービスに加入。ご家族様や事業者様の負担・不安を最小限に抑える安心の契約体制。
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Price & Fee Simulator Section -->
+    <section id="simulation" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">PRICING SIMULATOR</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-maru text-gray-900 mt-2">
+                    月額費用シミュレーター
+                </h2>
+                <p class="text-gray-600 text-base mt-3">
+                    年金（月10〜12万円程度）の範囲内で無理なく支払える料金体系。明朗な内訳で安心です。
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-12 gap-8 items-start">
+                
+                <!-- Left: Interactive Form Settings -->
+                <div class="lg:col-span-7 bg-warm-bg rounded-3xl p-6 md:p-8 border border-amber-200 shadow-sm space-y-6">
+                    <h3 class="text-xl font-bold font-maru text-brand-900 flex items-center gap-2 border-b border-amber-200 pb-3">
+                        <i class="fa-solid fa-sliders text-brand-600"></i> 条件を選択してください
+                    </h3>
+
+                    <!-- Room Size Option -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-2">1. お部屋タイプ（専有部家賃）</label>
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="cursor-pointer border-2 border-brand-500 bg-white p-4 rounded-2xl flex flex-col items-center text-center transition room-option-label" id="room-opt-standard">
+                                <input type="radio" name="room_type" value="35000" checked class="hidden" onchange="updateSimulation()">
+                                <span class="text-xs text-brand-600 font-bold">標準タイプ (6畳)</span>
+                                <span class="text-xl font-black text-gray-900 mt-1">35,000円/月</span>
+                            </label>
+                            <label class="cursor-pointer border-2 border-gray-200 bg-white p-4 rounded-2xl flex flex-col items-center text-center transition room-option-label" id="room-opt-wide">
+                                <input type="radio" name="room_type" value="45000" class="hidden" onchange="updateSimulation()">
+                                <span class="text-xs text-gray-500 font-bold">ゆったりタイプ (8畳・庭側)</span>
+                                <span class="text-xl font-black text-gray-900 mt-1">45,000円/月</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Fixed Monthly Common Fee -->
+                    <div class="bg-white p-4 rounded-2xl border border-amber-100 space-y-2">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-gray-700"><i class="fa-solid fa-bolt text-amber-500 mr-2"></i>共益費（光熱水費・Wi-Fi・日用品含む）</span>
+                            <span class="font-bold text-gray-900">15,000円/月 <span class="text-xs text-emerald-600">(固定)</span></span>
+                        </div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="font-bold text-gray-700"><i class="fa-solid fa-heart-circle-check text-rose-500 mr-2"></i>生活サポート料（見守り・緊急対応等）</span>
+                            <span class="font-bold text-gray-900">15,000円/月 <span class="text-xs text-emerald-600">(固定)</span></span>
+                        </div>
+                    </div>
+
+                    <!-- Meal Option Checkbox -->
+                    <div>
+                        <label class="block text-sm font-bold text-gray-800 mb-2">2. 夕食手配オプション（共食サービス）</label>
+                        <label class="cursor-pointer border border-amber-200 bg-white p-4 rounded-2xl flex items-center justify-between transition hover:border-brand-500">
+                            <div class="flex items-center gap-3">
+                                <input type="checkbox" id="meal-option" value="24000" checked onchange="updateSimulation()" class="w-5 h-5 text-brand-600 rounded border-gray-300 focus:ring-brand-500">
+                                <div>
+                                    <span class="text-sm font-bold text-gray-800">毎日の夕食（栄養バランス弁当・訪問調理）</span>
+                                    <p class="text-xs text-gray-500">リビングで他入居者様と一緒に楽しくお食事</p>
+                                </div>
+                            </div>
+                            <span class="text-sm font-bold text-brand-700">+約24,000円/月</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- Right: Simulation Result View -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-brand-900 to-brand-800 text-white rounded-3xl p-6 md:p-8 shadow-xl sticky top-28">
+                    <div class="text-center border-b border-brand-700/80 pb-6">
+                        <span class="text-xs font-bold text-amber-300 uppercase tracking-widest">ESTIMATED MONTHLY COST</span>
+                        <div class="text-sm text-amber-100 mt-1">毎月の概算お支払い合計</div>
+                        <div class="text-4xl md:text-5xl font-black font-maru text-amber-300 mt-2" id="sim-total-price">
+                            65,000 <span class="text-lg font-normal text-white">円 / 月</span>
+                        </div>
+                    </div>
+
+                    <div class="py-6 space-y-3 text-sm border-b border-brand-700/80">
+                        <div class="flex justify-between">
+                            <span class="text-amber-200">専有部分（個室家賃）:</span>
+                            <span class="font-bold text-white" id="sim-rent-price">35,000円</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-amber-200">共益費（光熱水費等）:</span>
+                            <span class="font-bold text-white">15,000円</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-amber-200">生活サポート費用:</span>
+                            <span class="font-bold text-white">15,000円</span>
+                        </div>
+                        <div class="flex justify-between" id="sim-meal-row">
+                            <span class="text-amber-200">夕食手配オプション:</span>
+                            <span class="font-bold text-white" id="sim-meal-price">24,000円</span>
+                        </div>
+                    </div>
+
+                    <!-- Pension Comparison Box -->
+                    <div class="pt-6 space-y-3">
+                        <div class="bg-brand-950/60 p-4 rounded-2xl border border-brand-700 text-xs leading-relaxed text-amber-100">
+                            <i class="fa-solid fa-circle-info text-amber-300 mr-1"></i>
+                            国民年金受給枠（月額約10万〜12万円）の範囲内で食費・生活費を含めても十分にお手元に残る価格設定です。入居一時金・敷金礼金も最小限に抑えています。
+                        </div>
+
+                        <button onclick="openModal()" class="w-full py-4 rounded-2xl bg-amber-400 hover:bg-amber-300 text-brand-950 font-bold text-base shadow-lg transition transform active:scale-98 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-file-pen"></i>
+                            <span>この条件で入居相談・空き状況確認</span>
+                        </button>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Move-in Flow Section -->
+    <section class="py-16 md:py-24 bg-warm-bg wood-pattern">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">FLOW TO MOVE-IN</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-maru text-gray-900 mt-2">
+                    ご入居までの4ステップ
+                </h2>
+                <p class="text-gray-600 text-base mt-3">
+                    まずはご質問・ご見学からお気軽にお尋ねください。ご本人様のみならず、ご家族やケアマネジャー様からのご相談も歓迎いたします。
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <!-- Step 1 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mb-4">1</div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">お問い合わせ・ご相談</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        お電話またはWEBフォームよりお気軽にご連絡ください。空室状況や暮らしのイメージをお答えします。
+                    </p>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mb-4">2</div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">現地ご見学・体験生活</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        実際にハウスのお部屋やコモンリビングをご覧いただきます。雰囲気や他入居者様との交流をお確かめください。
+                    </p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mb-4">3</div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">ご面談・ご契約</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        心身の状態やお身体のサポート体制についてヒアリングを行い、問題がなければ入居契約を締結します。
+                    </p>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-white rounded-2xl p-6 border border-amber-100 shadow-sm relative">
+                    <div class="w-10 h-10 rounded-full bg-brand-600 text-white font-bold flex items-center justify-center mb-4">4</div>
+                    <h3 class="text-lg font-bold font-maru text-gray-900 mb-2">ご入居・スタート</h3>
+                    <p class="text-xs text-gray-600 leading-relaxed">
+                        愛用の家具や慣れ親しんだ小物を持ち込んで、安心で温かい「まちなか長屋」での暮らしが始まります。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- For Owners and Care Managers Section -->
+    <section class="py-16 bg-sage-700 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-8 space-y-4">
+                    <span class="px-3 py-1 bg-sage-500 text-white text-xs font-bold rounded-full">空き家所有者様・ケアマネジャー様へ</span>
+                    <h2 class="text-2xl sm:text-3xl font-bold font-maru">
+                        地域の空き家活用・入居者様ご紹介のご相談承り中
+                    </h2>
+                    <p class="text-sage-100 text-sm leading-relaxed">
+                        120㎡〜200㎡程度の木造戸建てをお持ちのオーナー様には長期サブリース（賃貸借契約）での利活用をご提案。また、地域包括支援センター様やケアマネジャー様からの単身高齢者の住まい探し相談も随時承っております。
+                    </p>
+                </div>
+                <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col gap-3">
+                    <button onclick="openModal()" class="px-6 py-3 rounded-xl bg-amber-400 hover:bg-amber-300 text-gray-900 font-bold text-center transition">
+                        <i class="fa-solid fa-house-circle-check mr-2"></i>空き家所有者様のお問合せ
+                    </button>
+                    <button onclick="openModal()" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white border border-white/20 font-bold text-center transition">
+                        <i class="fa-solid fa-handshake-angle mr-2"></i>ケアマネジャー様のご相談
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 md:py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="text-brand-600 font-bold text-sm tracking-widest uppercase">FAQ</span>
+                <h2 class="text-3xl sm:text-4xl font-bold font-maru text-gray-900 mt-2">
+                    よくあるご質問
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                
+                <!-- FAQ Item 1 -->
+                <div class="border border-amber-200 rounded-2xl overflow-hidden bg-warm-bg">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-bold font-maru text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Q. 認知症や介護度が進んだ場合は退去しなければなりませんか？</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-sm text-gray-700 border-t border-amber-100/60 leading-relaxed">
+                        A. 軽度の認知症や要介護度の上昇であれば、地域の訪問介護・看護やデイサービス等の外部介護サービスを組み合わせてそのまま住み続けていただけます。常時医療対応が必要な状況になった場合は、医療機関や提携施設へのスムーズな移行をご相談させていただきます。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-amber-200 rounded-2xl overflow-hidden bg-warm-bg">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-bold font-maru text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Q. 食事は必ずリビングで食べなければいけませんか？</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-sm text-gray-700 border-t border-amber-100/60 leading-relaxed">
+                        A. いいえ、強制ではありません。体調が優れない日やお一人で静かに過ごしたい日はお部屋でお召し上がりいただけます。無理のない「ゆるやかな共食」の機会としてコモンリビングを活用していただけます。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-amber-200 rounded-2xl overflow-hidden bg-warm-bg">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-bold font-maru text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Q. 外出や家族の訪問、夜間の門限に制限はありますか？</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-sm text-gray-700 border-t border-amber-100/60 leading-relaxed">
+                        A. 施設ではなく一般的な「賃貸住宅」ですので、外出やご家族・ご友人のお越しは自由です。防犯のため夜間の施錠時間は設けておりますが、ご自身のペースで自由度の高い毎日をお過ごしいただけます。
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="border border-amber-200 rounded-2xl overflow-hidden bg-warm-bg">
+                    <button onclick="toggleFaq(this)" class="w-full p-5 text-left font-bold font-maru text-gray-900 flex justify-between items-center focus:outline-none">
+                        <span>Q. 身元保証人が立てられない場合はどうすればよいですか？</span>
+                        <i class="fa-solid fa-chevron-down text-brand-600 transition-transform"></i>
+                    </button>
+                    <div class="faq-answer hidden p-5 pt-0 text-sm text-gray-700 border-t border-amber-100/60 leading-relaxed">
+                        A. 身元保証人様がいらっしゃらない単身の方でも、提携する身元保証法人や高齢者賃貸保証制度、保険を活用してご入居いただける仕組みを整えております。個別にご事情をお伺いしますので一度ご相談ください。
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer CTA Banner -->
+    <section class="py-16 bg-gradient-to-r from-brand-700 to-brand-900 text-white text-center">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <h2 class="text-3xl sm:text-4xl font-bold font-maru">
+                まずはお気軽にハウスをご見学ください
+            </h2>
+            <p class="text-amber-100 text-base leading-relaxed">
+                温かいお茶をご用意してお待ちしております。実際にスタッフやハウスの雰囲気に触れてみませんか？
+            </p>
+            <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="tel:0120-000-000" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-white text-brand-900 font-bold text-lg shadow-lg hover:bg-amber-50 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-phone text-brand-600"></i>
+                    <span>0120-XXX-XXX (通話無料)</span>
+                </a>
+                <button onclick="openModal()" class="w-full sm:w-auto px-8 py-4 rounded-2xl bg-amber-400 text-brand-950 font-bold text-lg shadow-lg hover:bg-amber-300 transition flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>見学・相談予約（24時間受付）</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Page Information -->
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-3 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold font-maru">長</div>
+                    <span class="text-xl font-bold font-maru text-white">まちなか長屋</span>
+                </div>
+                <p class="text-xs leading-relaxed text-gray-400">
+                    空き家問題と単身高齢者の孤立化を同時に解消する、安心と低価格を両立した新世代の共生型住宅プロジェクト。
+                </p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-3">コンテンツ</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#concept" class="hover:text-amber-400 transition">コンセプト・ターゲット</a></li>
+                    <li><a href="#facilities" class="hover:text-amber-400 transition">リノベーション・設備</a></li>
+                    <li><a href="#support" class="hover:text-amber-400 transition">安心の見守り・医療連携</a></li>
+                    <li><a href="#simulation" class="hover:text-amber-400 transition">月額費用シミュレーション</a></li>
+                    <li><a href="#faq" class="hover:text-amber-400 transition">よくある質問</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-3">運営事業者問い合わせ</h4>
+                <p class="text-xs leading-relaxed">
+                    株式会社 まちなか長屋 運営事務局<br>
+                    〒100-0000 東京都千代田区1-1-1<br>
+                    TEL: 03-XXXX-XXXX / Mail: info@machinaka-nagaya.jp
+                </p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-gray-800 text-center text-xs text-gray-500">
+            &copy; 2026 まちなか長屋 All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- Booking Modal Dialogue -->
+    <div id="booking-modal" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 md:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-5 right-5 text-gray-400 hover:text-gray-600 text-2xl w-8 h-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <span class="inline-block px-3 py-1 bg-amber-100 text-brand-800 text-xs font-bold rounded-full mb-2">無料見学・入居相談</span>
+                <h3 class="text-2xl font-bold font-maru text-gray-900">「まちなか長屋」ご予約フォーム</h3>
+                <p class="text-xs text-gray-500 mt-1">ご入居のご相談、見学予約、ケアマネジャー様からの問合せを受け付けます。</p>
+            </div>
+
+            <form onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">お名前 <span class="text-rose-500">*</span></label>
+                    <input type="text" required placeholder="山田 太郎" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">ご関係 <span class="text-rose-500">*</span></label>
+                    <select required class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm bg-white">
+                        <option value="本人">ご本人様</option>
+                        <option value="家族">ご家族様（お子様・ご親族）</option>
+                        <option value="ケアマネジャー">ケアマネジャー・地域包括関係者</option>
+                        <option value="オーナー">空き家オーナー様</option>
+                        <option value="その他">その他</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">電話番号 <span class="text-rose-500">*</span></label>
+                    <input type="tel" required placeholder="090-0000-0000" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">メールアドレス</label>
+                    <input type="email" placeholder="example@email.com" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">ご希望の内容</label>
+                    <div class="grid grid-cols-2 gap-2 text-xs">
+                        <label class="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-amber-50">
+                            <input type="checkbox" checked class="text-brand-600 rounded"> 現地見学・案内
+                        </label>
+                        <label class="flex items-center gap-2 p-2 border rounded-lg cursor-pointer hover:bg-amber-50">
+                            <input type="checkbox" class="text-brand-600 rounded"> 資料請求
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-gray-700 mb-1">ご質問・備考</label>
+                    <textarea rows="3" placeholder="ご希望の日時や気になっている点をご記入ください" class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-500 focus:outline-none text-sm"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-700 text-white font-bold text-base shadow-lg hover:opacity-95 transition">
+                    予約・問合せを送信する
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Modal Handler
+        function openModal() {
+            document.getElementById('booking-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('booking-modal').classList.add('hidden');
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            alert("お申込みを受け付けました。担当者より折り返しご連絡いたします。");
+            closeModal();
+        }
+
+        // Facility Tab Switcher
+        function switchTab(tabName) {
+            // Hide all contents
+            document.querySelectorAll('.facility-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Deactivate all buttons
+            document.querySelectorAll('.facility-tab-btn').forEach(btn => {
+                btn.classList.remove('bg-brand-600', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'text-gray-700');
+            });
+
+            // Show target content
+            const activeContent = document.getElementById(`tab-content-${tabName}`);
+            if (activeContent) activeContent.classList.remove('hidden');
+
+            // Activate target button
+            const activeBtn = document.getElementById(`tab-btn-${tabName}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'text-gray-700');
+                activeBtn.classList.add('bg-brand-600', 'text-white', 'shadow-md');
+            }
+        }
+
+        // FAQ Accordion Toggle
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('i');
+
+            if (answer.classList.contains('hidden')) {
+                answer.classList.remove('hidden');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                answer.classList.add('hidden');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Pricing Simulator Calculation
+        function updateSimulation() {
+            const roomRadios = document.getElementsByName('room_type');
+            let roomPrice = 35000;
+
+            for (const radio of roomRadios) {
+                if (radio.checked) {
+                    roomPrice = parseInt(radio.value);
+                }
+            }
+
+            // Update Radio Option Visual Active States
+            const stdLabel = document.getElementById('room-opt-standard');
+            const wideLabel = document.getElementById('room-opt-wide');
+            if (roomPrice === 35000) {
+                stdLabel.classList.add('border-brand-500');
+                stdLabel.classList.remove('border-gray-200');
+                wideLabel.classList.remove('border-brand-500');
+                wideLabel.classList.add('border-gray-200');
+            } else {
+                wideLabel.classList.add('border-brand-500');
+                wideLabel.classList.remove('border-gray-200');
+                stdLabel.classList.remove('border-brand-500');
+                stdLabel.classList.add('border-gray-200');
+            }
+
+            const commonFee = 15000;
+            const supportFee = 15000;
+
+            const mealCheckbox = document.getElementById('meal-option');
+            const mealPrice = mealCheckbox.checked ? parseInt(mealCheckbox.value) : 0;
+
+            const totalPrice = roomPrice + commonFee + supportFee + mealPrice;
+
+            // Update Display DOM
+            document.getElementById('sim-total-price').innerHTML = `${totalPrice.toLocaleString()} <span class="text-lg font-normal text-white">円 / 月</span>`;
+            document.getElementById('sim-rent-price').innerText = `${roomPrice.toLocaleString()}円`;
+            
+            const mealRow = document.getElementById('sim-meal-row');
+            if (mealCheckbox.checked) {
+                mealRow.classList.remove('hidden');
+                document.getElementById('sim-meal-price').innerText = `${mealPrice.toLocaleString()}円`;
+            } else {
+                mealRow.classList.add('hidden');
+            }
+        }
+
+        // Initialize Simulation on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            updateSimulation();
+        });
+    </script>
+</body>
+</html>
